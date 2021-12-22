@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 apply from: '../../constants.gradle'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.android.application'
 
 android {
@@ -20,6 +21,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/annotation-experimental_release.kotlin_module'
     }
 
     defaultConfig {
@@ -85,6 +90,15 @@ dependencies {
     withDecoderExtensionsImplementation project(modulePrefix + 'extension-opus')
     withDecoderExtensionsImplementation project(modulePrefix + 'extension-vp9')
     withDecoderExtensionsImplementation project(modulePrefix + 'extension-rtmp')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+
 }
 
 apply plugin: 'com.google.android.gms.strict-version-matcher-plugin'
+repositories {
+    mavenCentral()
+}
